@@ -20,7 +20,7 @@ public class AuthorizationConsent {
     private String registeredClientId;
     @Id
     private String principalName;
-    @Column(length = 1000)
+    @Column
     private String authorities;
 
     public static class AuthorizationConsentId implements Serializable {

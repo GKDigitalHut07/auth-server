@@ -104,7 +104,7 @@ public class AuthorizationSecurityConfig {
                         .successHandler(authenticationSuccessHandler())
                 )
                 .apply(federatedIdentityConfigurer);
-        http.logout(logout -> logout.logoutSuccessUrl("http://127.0.0.1:4200/logout"));
+        http.logout(logout -> logout.logoutSuccessUrl("http://localhost:4200/logout"));
 
         return http.build();
     }
