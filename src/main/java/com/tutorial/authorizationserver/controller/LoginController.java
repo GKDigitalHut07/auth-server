@@ -12,6 +12,11 @@ public class LoginController {
     public String login() {
         return "login";
     }
+    
+    @GetMapping("/auth/signup")
+    public String signUp() {
+        return "signup";
+    }
 
     @GetMapping("/logout")
     public String logout() {
