@@ -22,8 +22,8 @@ public class BeansConfig {
         CorsConfiguration cors = new CorsConfiguration();
         cors.addAllowedHeader("*");
         cors.addAllowedMethod("*");
-        cors.setAllowCredentials(true);
-        cors.addAllowedOrigin("http://localhost:4200");
+//        cors.setAllowCredentials(true);
+        cors.addAllowedOrigin("*");
         source.registerCorsConfiguration("/**", cors);
         return source;
     }

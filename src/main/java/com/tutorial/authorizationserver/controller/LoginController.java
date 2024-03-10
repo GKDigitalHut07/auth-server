@@ -13,9 +13,14 @@ public class LoginController {
         return "login";
     }
     
-    @GetMapping("/auth/signup")
-    public String signUp() {
-        return "signup";
+    @GetMapping("/home")
+    public String home() {
+        return "home";
+    }
+    
+    @GetMapping("/auth/login/signup")
+    public String redirectToSignup() {
+        return "redirect:/auth/signup";
     }
 
     @GetMapping("/logout")

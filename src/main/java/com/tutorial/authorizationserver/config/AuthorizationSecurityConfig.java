@@ -11,6 +11,8 @@ import com.tutorial.authorizationserver.repository.GoogleUserRepository;
 import com.tutorial.authorizationserver.service.ClientService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -66,6 +68,11 @@ public class AuthorizationSecurityConfig {
     private final PasswordEncoder passwordEncoder;
     private final ClientService clientService;
     private final GoogleUserRepository googleUserRepository;
+    
+    @Value("${logout.url}")
+    private String logoutUrl;
+    @Value("${auth.issuer.url}")
+    private String authIssuerUrl;
 
     private static final String CUSTOM_CONSENT_PAGE = "/oauth2/consent";
 
@@ -90,13 +97,13 @@ public class AuthorizationSecurityConfig {
     @Order(2)
     public SecurityFilterChain webSecurityFilterChain(HttpSecurity http) throws Exception {
         http.cors(Customizer.withDefaults());
-        http.csrf(csrf -> csrf.ignoringRequestMatchers("/auth/**", "/client/**"));
+        http.csrf(csrf -> csrf.ignoringRequestMatchers("/auth/**", "/client/**","/home"));
         FederatedIdentityConfigurer federatedIdentityConfigurer = new FederatedIdentityConfigurer()
                 .oauth2UserHandler(new UserRepositoryOAuth2UserHandler(googleUserRepository));
         http
                 .authorizeHttpRequests(authorize ->
                         authorize
-                                .requestMatchers("/auth/**", "/client/**", "/login").permitAll()
+                                .requestMatchers("/auth/**", "/client/**", "/login","/home").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .formLogin(login -> login.loginPage("/login"))
@@ -104,7 +111,7 @@ public class AuthorizationSecurityConfig {
                         .successHandler(authenticationSuccessHandler())
                 )
                 .apply(federatedIdentityConfigurer);
-        http.logout(logout -> logout.logoutSuccessUrl("http://localhost:4200/logout"));
+        http.logout(logout -> logout.logoutSuccessUrl(logoutUrl));
 
         return http.build();
     }
@@ -182,7 +189,7 @@ public class AuthorizationSecurityConfig {
 
     @Bean
     public AuthorizationServerSettings authorizationServerSettings(){
-        return AuthorizationServerSettings.builder().issuer("http://localhost:9000").build();
+        return AuthorizationServerSettings.builder().issuer(authIssuerUrl).build();
     }
 
     @Bean

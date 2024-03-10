@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="https://www.thymeleaf.org">
+	xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
 <meta name="viewport"
@@ -13,6 +13,40 @@
 	crossorigin="anonymous">
 </head>
 <body class="bg-light ml-5">
+
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">GK Digital Hut</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+				aria-controls="navbarNavDropdown" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavDropdown">
+				<ul class="navbar-nav">
+					<li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
+					<li class="nav-item"><a class="nav-link active" aria-current="page" href="/login">Log In</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="/auth/signup">Sign Up</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="/auth/getRoles">Roles</a>
+					</li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" role="button"
+						data-bs-toggle="dropdown" aria-expanded="false"> Other
+					</a>
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item" href="#">Action</a></li>
+							<li><a class="dropdown-item" href="#">Another action</a></li>
+							<li><a class="dropdown-item" href="#">Something else
+									here</a></li>
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 	<div class="d-flex align-items-center justify-content-center" style="height:100vh">
 		
 			<div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
@@ -62,18 +96,18 @@
 								</div>
 								<div class="col-12">
 									<p class="m-0 text-secondary text-center">
-										Don't have an account? <a href="/signup.html" th:href="@{/auth/signup}"
+										Don't have an account? <a th:href="@{/auth/login/signup}"
 											class="link-primary text-decoration-none">Sign up</a>
 									</p>
 								</div>
 							</div>
-							<a class="btn btn-light btn-block bg-white"
+							<!-- <a class="btn btn-light btn-block bg-white"
 								href="/oauth2/authorization/google-idp" role="link"
 								style="text-transform: none;"> <img width="20"
 								style="margin-right: 5px;" alt="Sign in with Google"
 								src="https://fonts.gstatic.com/s/i/productlogos/googleg/v6/24px.svg" />
 								Sign in with Google
-							</a>
+							</a> -->
 						</form>
 					</div>
 				</div>

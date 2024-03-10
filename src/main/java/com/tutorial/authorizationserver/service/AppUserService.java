@@ -31,7 +31,7 @@ public class AppUserService {
                 .build();
         Set<Role> roles = new HashSet<>();
         dto.roles().forEach(r -> {
-            Role role = repository.findByRole(RoleName.valueOf(r))
+            Role role = repository.findByRole(r)
                     .orElseThrow(()-> new RuntimeException("role not found"));
             roles.add(role);
         });
